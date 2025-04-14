@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:meals_app/screens/tabs.dart';
 
@@ -13,7 +15,16 @@ final theme = ThemeData(
 );
 
 void main() {
-  runApp(const App());
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  
+  runApp(
+    const ProviderScope(
+      child: App(),
+    ),
+  );
+  
+  FlutterNativeSplash.remove();
 }
 
 class App extends StatelessWidget {
@@ -21,6 +32,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: theme, home: const TabsScreen());
+    return MaterialApp(
+      theme: theme,
+      home: const TabsScreen(),
+    );
   }
 }
