@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/models/meal.dart';
-import 'package:meals_app/screens/meal_details.dart';
-import 'package:meals_app/widgets/meal_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
+
+import 'package:meals_app/widgets/meal_item_trait.dart';
+import 'package:meals_app/models/meal.dart';
 
 class MealItem extends StatelessWidget {
   const MealItem({super.key, required this.meal, required this.onSelectMeal});
@@ -19,8 +19,6 @@ class MealItem extends StatelessWidget {
     return meal.affordability.name[0].toUpperCase() +
         meal.affordability.name.substring(1);
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +47,7 @@ class MealItem extends StatelessWidget {
               child: Container(
                 color: Colors.black54,
                 padding: const EdgeInsets.symmetric(
-                  vertical: 5,
+                  vertical: 6,
                   horizontal: 44,
                 ),
                 child: Column(
@@ -57,26 +55,26 @@ class MealItem extends StatelessWidget {
                     Text(
                       meal.title,
                       maxLines: 2,
-                      softWrap: true,
                       textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis, // Very long text ...
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 12),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         MealItemTrait(
                           icon: Icons.schedule,
                           label: '${meal.duration} min',
                         ),
-                        const SizedBox(width: 6),
-                        MealItemTrait(
-                          icon: Icons.work,
-                          label: complexityText,
-                        ),
-                        const SizedBox(width: 6),
+                        const SizedBox(width: 12),
+                        MealItemTrait(icon: Icons.work, label: complexityText),
+                        const SizedBox(width: 12),
                         MealItemTrait(
                           icon: Icons.attach_money,
                           label: affordabilityText,
